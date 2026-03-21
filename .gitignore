@@ -1,0 +1,10 @@
+backend/venv/
+medimind-frontend/node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.dylib
+*.so
+.DS_Store
+.env
