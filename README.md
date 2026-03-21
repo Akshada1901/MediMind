@@ -111,9 +111,6 @@ Mention critical findings first, note high-risk conditions, suggest next steps.
 Be factual and clinical. No bullet points.
 The model runs at temperature=0.3 for factual, consistent clinical output.
 
-📸 Screenshots
-
-Add screenshots of the dashboard, knowledge graph, risk chart, and clinical summary here
 
 
 🔮 Future Improvements
@@ -125,10 +122,4 @@ Add screenshots of the dashboard, knowledge graph, risk chart, and clinical summ
  Add doctor authentication and patient record management
 
 
-👩‍💻 Author
-Asyas Shri
-B.Tech CSE — SRM University (2024–2028)
-LinkedIn • GitHub
 
-📄 License
-This project is open source and available under the MIT License.
