@@ -32,32 +32,62 @@ export default function App() {
 
       {/* BG Grid */}
       <div style={{ position:"fixed", inset:0, zIndex:0, backgroundImage:"linear-gradient(rgba(24,71,240,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(24,71,240,0.06) 1px,transparent 1px)", backgroundSize:"48px 48px", pointerEvents:"none" }}/>
+      {/* Glow 1 */}
       <div style={{ position:"fixed", top:-200, left:-200, width:700, height:700, borderRadius:"50%", background:"radial-gradient(circle,rgba(24,71,240,0.18) 0%,transparent 70%)", pointerEvents:"none", zIndex:0 }}/>
+      {/* Glow 2 */}
       <div style={{ position:"fixed", bottom:-150, right:-150, width:600, height:600, borderRadius:"50%", background:"radial-gradient(circle,rgba(0,212,255,0.12) 0%,transparent 70%)", pointerEvents:"none", zIndex:0 }}/>
 
       <div style={{ position:"relative", zIndex:1, maxWidth:1200, margin:"0 auto", padding:"0 32px 80px" }}>
 
-        {/* HEADER */}
-        <header style={{ display:"flex", alignItems:"center", justifyContent:"flex-end", padding:"28px 0 24px", borderBottom:"1px solid rgba(255,255,255,0.08)", marginBottom:56 }}>
+        {/* ── HEADER ── */}
+        <header style={{
+          display:"flex", alignItems:"center", justifyContent:"flex-end",
+          padding:"28px 0 24px",
+          borderBottom:"1px solid rgba(255,255,255,0.08)",
+          marginBottom:56
+        }}>
           <div style={{ display:"flex", alignItems:"center", gap:8, fontSize:13, color:"rgba(232,237,248,0.45)" }}>
             <span style={{ width:8, height:8, borderRadius:"50%", background:"#00e5a0", boxShadow:"0 0 8px #00e5a0", display:"inline-block", animation:"pulse 2s infinite" }}/>
             System Online
           </div>
         </header>
 
-        {/* HERO */}
+        {/* ── HERO ── */}
         <div style={{ textAlign:"center", marginBottom:56 }}>
-          <h1 style={{ fontFamily:"'DM Serif Display',serif", fontSize:"clamp(52px,7vw,88px)", fontWeight:"bold", lineHeight:1.05, letterSpacing:"-3px", marginBottom:12 }}>
+
+          {/* MediMind big bold */}
+          <h1 style={{
+            fontFamily:"'DM Serif Display',serif",
+            fontSize:"clamp(52px,7vw,88px)",
+            fontWeight:"bold",
+            lineHeight:1.05,
+            letterSpacing:"-3px",
+            marginBottom:12
+          }}>
             Medi<span style={{ color:"#00d4ff" }}>Mind</span>
           </h1>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:8, fontSize:10, fontWeight:600, letterSpacing:"3px", textTransform:"uppercase", color:"#00d4ff", marginBottom:24 }}>
+
+          {/* Subtitle small */}
+          <div style={{
+            display:"inline-flex", alignItems:"center", gap:8,
+            fontSize:10, fontWeight:600, letterSpacing:"3px",
+            textTransform:"uppercase", color:"#00d4ff",
+            marginBottom:24
+          }}>
             <span style={{ width:28, height:1, background:"#00d4ff", opacity:0.5, display:"inline-block" }}/>
             AI Clinical Intelligence Platform
             <span style={{ width:28, height:1, background:"#00d4ff", opacity:0.5, display:"inline-block" }}/>
           </div>
-          <p style={{ fontSize:16, color:"rgba(232,237,248,0.5)", maxWidth:500, margin:"0 auto 40px", lineHeight:1.7 }}>
-            Upload any medical PDF — our AI pipeline extracts entities, predicts disease risks, and generates doctor-ready clinical summaries instantly.
+
+          <p style={{
+            fontSize:16, color:"rgba(232,237,248,0.5)",
+            maxWidth:500, margin:"0 auto 40px", lineHeight:1.7
+          }}>
+            Upload any medical PDF — our AI pipeline extracts entities, predicts disease risks,
+            and generates doctor-ready clinical summaries instantly.
           </p>
+
+          {/* Stats */}
           <div style={{ display:"flex", justifyContent:"center", gap:56 }}>
             {[["80%","Prediction Accuracy"],["70%","Time Saved"],["3s","Avg. Analysis"]].map(([n,l]) => (
               <div key={l} style={{ textAlign:"center" }}>
@@ -68,7 +98,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* PIPELINE */}
+        {/* ── PIPELINE ── */}
         <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:0, marginBottom:40, flexWrap:"wrap" }}>
           {steps.map((s, i) => {
             const isDone = results ? true : false;
@@ -80,9 +110,12 @@ export default function App() {
                   display:"flex", alignItems:"center", gap:10,
                   padding:"10px 18px", borderRadius:10, fontSize:13, fontWeight:500,
                   border:"1px solid", transition:"all 0.4s",
-                  ...(isDone ? { background:"rgba(0,229,160,0.08)", borderColor:"rgba(0,229,160,0.3)", color:"#00e5a0" }
-                    : isActive ? { background:"rgba(24,71,240,0.15)", borderColor:"rgba(24,71,240,0.4)", color:"#00d4ff" }
-                    : isPast ? { background:"rgba(0,229,160,0.08)", borderColor:"rgba(0,229,160,0.3)", color:"#00e5a0" }
+                  ...(isDone
+                    ? { background:"rgba(0,229,160,0.08)", borderColor:"rgba(0,229,160,0.3)", color:"#00e5a0" }
+                    : isActive
+                    ? { background:"rgba(24,71,240,0.15)", borderColor:"rgba(24,71,240,0.4)", color:"#00d4ff" }
+                    : isPast
+                    ? { background:"rgba(0,229,160,0.08)", borderColor:"rgba(0,229,160,0.3)", color:"#00e5a0" }
                     : { background:"rgba(255,255,255,0.03)", borderColor:"rgba(255,255,255,0.08)", color:"rgba(232,237,248,0.35)" })
                 }}>
                   <div style={{
@@ -92,22 +125,36 @@ export default function App() {
                   }}/>
                   {s}
                 </div>
-                {i < steps.length-1 && <span style={{ padding:"0 6px", color:"rgba(255,255,255,0.12)", fontSize:16 }}>→</span>}
+                {i < steps.length-1 && (
+                  <span style={{ padding:"0 6px", color:"rgba(255,255,255,0.12)", fontSize:16 }}>→</span>
+                )}
               </React.Fragment>
             );
           })}
         </div>
 
-        {/* UPLOAD */}
-        <Upload setResults={setResults} setLoading={setLoading} loading={loading} animatePipeline={animatePipeline} />
+        {/* ── UPLOAD ── */}
+        <Upload
+          setResults={setResults}
+          setLoading={setLoading}
+          loading={loading}
+          animatePipeline={animatePipeline}
+        />
 
-        {/* DASHBOARD */}
+        {/* ── DASHBOARD ── */}
         {results && <Dashboard results={results} />}
 
       </div>
 
-      <footer style={{ position:"relative", zIndex:1, textAlign:"center", padding:24, borderTop:"1px solid rgba(255,255,255,0.06)", fontSize:12, color:"rgba(232,237,248,0.25)", fontFamily:"'JetBrains Mono',monospace" }}>
-        Team HACKRON · MediMind v1.0 · BioBERT + scispaCy + XGBoost + HuggingFace + Groq LLaMA
+      {/* ── FOOTER ── */}
+      <footer style={{
+        position:"relative", zIndex:1,
+        textAlign:"center", padding:24,
+        borderTop:"1px solid rgba(255,255,255,0.06)",
+        fontSize:12, color:"rgba(232,237,248,0.25)",
+        fontFamily:"'JetBrains Mono',monospace"
+      }}>
+        Team HACKRON · MediMind v1.0 · BioBERT + scispaCy + XGBoost + Groq LLaMA
       </footer>
     </div>
   );

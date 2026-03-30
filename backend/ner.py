@@ -85,15 +85,10 @@ def is_negated(sentence: str, keyword: str) -> bool:
 def extract_entities(text: str) -> dict:
     text_lower = text.lower()
     entities = {
-        "DISEASE": [],
-        "MEDICATION": [],
-        "LAB_VALUE": [],
-        "SYMPTOM": [],
-        "CLINICAL_FINDINGS": [],
-        "RECOMMENDATIONS": []
+        "DISEASE": [], "MEDICATION": [], "LAB_VALUE": [],
+        "SYMPTOM": [], "CLINICAL_FINDINGS": [], "RECOMMENDATIONS": []
     }
 
-    # spaCy NER
     doc = nlp(text)
     for ent in doc.ents:
         label = ent.label_
@@ -107,36 +102,29 @@ def extract_entities(text: str) -> dict:
             if val not in entities["MEDICATION"]:
                 entities["MEDICATION"].append(val)
 
-    # Rule-based disease detection
     for kw in DISEASE_KEYWORDS:
         if kw in text_lower:
             display = kw.title()
             if display not in entities["DISEASE"]:
                 entities["DISEASE"].append(display)
 
-    # Rule-based drug detection
     for kw in DRUG_KEYWORDS:
         if kw in text_lower:
             display = kw.title()
             if display not in entities["MEDICATION"]:
                 entities["MEDICATION"].append(display)
 
-    # Lab value extraction
     matches = LAB_PATTERN.findall(text)
     for name, value, unit in matches:
         entry = f"{name.strip()}: {value.strip()}{(' ' + unit.strip()) if unit.strip() else ''}"
         if entry not in entities["LAB_VALUE"] and value.strip():
             entities["LAB_VALUE"].append(entry)
 
-    # Specific lab extractors
     specific_patterns = [
         (r'vitamin\s*d[:\s]+(\d+\.?\d*)', "Vitamin D"),
         (r'bmi[:\s]+(\d+\.?\d*)', "BMI"),
         (r'ferritin[:\s]+(\d+\.?\d*)', "Ferritin"),
         (r'(?:vitamin\s*)?b12[:\s]+(\d+\.?\d*)', "Vitamin B12"),
-        (r'uric\s+acid[:\s]+(\d+\.?\d*)', "Uric Acid"),
-        (r'sodium[:\s]+(\d+\.?\d*)', "Sodium"),
-        (r'potassium[:\s]+(\d+\.?\d*)', "Potassium"),
     ]
     for pattern, label in specific_patterns:
         m = re.search(pattern, text, re.IGNORECASE)
@@ -145,7 +133,6 @@ def extract_entities(text: str) -> dict:
             if entry not in entities["LAB_VALUE"]:
                 entities["LAB_VALUE"].append(entry)
 
-    # Negation-aware symptom detection
     sentences = re.split(r'[.;]', text)
     for sentence in sentences:
         for kw in SYMPTOM_KEYWORDS:
@@ -154,13 +141,11 @@ def extract_entities(text: str) -> dict:
                 if display not in entities["SYMPTOM"]:
                     entities["SYMPTOM"].append(display)
 
-    # Clinical findings
     for kw in FINDING_KEYWORDS:
         if kw in text_lower:
             if kw.title() not in entities["CLINICAL_FINDINGS"]:
                 entities["CLINICAL_FINDINGS"].append(kw.title())
 
-    # Recommendations
     for kw in RECOMMENDATION_KEYWORDS:
         if kw in text_lower:
             if kw.title() not in entities["RECOMMENDATIONS"]:
