@@ -1,4 +1,5 @@
 # 🧠 MediMind
+visit-https://medimind-tech.vercel.app/
 
 MediMind is an AI-powered clinical intelligence system that analyzes patient medical reports and generates concise physician-style clinical summaries.
 
